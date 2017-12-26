@@ -14,7 +14,7 @@ const handleKeyPress = (event) => {
   //if key pressed was one of the keys, then cause it to be highlighted
   for (let i in keys) {
     if (keys[i].unicode === event.which) {
-      let c = document.querySelector("[data-key='" + i + "']")
+      let c = document.querySelector(`[data-key='${i}']`)
       c.classList.add("playing")
       c.querySelector("audio").currentTime = 0
       c.querySelector("audio").play();
@@ -45,15 +45,17 @@ const runApp = () => {
     audioElement.setAttribute("data-key", item)
     audioElement.setAttribute("src", keys[item].sound)
 
-    div.append(keySpan)
-    div.append(soundSpan)
-    div.append(audioElement)
+    div.appendChild(keySpan)
+    div.appendChild(soundSpan)
+    div.appendChild(audioElement)
 
     parent.appendChild(div)
 
     // add event listener for completed transition - when animation is done,
     // remove the playing class
-    div.addEventListener("transitionend", function() {
+    div.addEventListener("transitionend", function(e) {
+      //only remove class for transform animation
+      if (e.propertyName !== "transform") return;
       this.classList.remove("playing")
     })
 
