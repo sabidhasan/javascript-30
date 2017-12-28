@@ -1,0 +1,53 @@
+html, body {
+  background-color: gold;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica";
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 30%;
+}
+
+input[type="text"] {
+    flex-basis: 30%;
+    padding: 0.3rem;
+    font-size: 1.4rem;
+    font-weight: 100;
+    text-align: center;
+    border: 5px solid lightgray;
+    outline: 1px solid darkgray;
+    transition: all 1s;
+}
+.inactive {
+  transform: translateY(500%);
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  flex-basis: 80%;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  background: linear-gradient(to bottom, #ffffff 50%,#e5e5e5 100%) white;
+  width: 75%;
+  padding: 0.5rem 0.3rem;
+  border: 2px solid silver;
+  text-align: left;
+}
+ul li:nth-child(2n) {
+    transform: perspective(250px) rotateX(10deg);
+    margin: -2px auto;
+}
+ul li:nth-child(2n+1) {
+    transform: perspective(250px) rotateX(-15deg);
+    margin: -1px auto;
+
+}
+ul li span {float: right;}
