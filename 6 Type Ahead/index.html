@@ -8,28 +8,15 @@
   </head>
   <body>
     <form>
-      <input type="text" name="search" id="search" class="inactive" />
-      <ul>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-        <li>Test<span>Hello</span></li>
-
+      <img class="logo" src="logo.png" />
+      <input type="text" name="search" id="search" class="inactive" placeholder="City or State" autocomplete="off"/>
+      <ul class="suggestions">
       </ul>
     </form>
 
     <script>
       const inpBox = document.querySelector("#search")
-      inpBox.addEventListener("focus", toggleClass)//function() {this.classList.toggle("inactive")})
-      inpBox.addEventListener("blur", toggleClass)
-      function toggleClass() {
-        this.classList.toggle("inactive")
-
-      }
-
+      inpBox.addEventListener("keyup", displayMatch)
     </script>
 
   </body>
