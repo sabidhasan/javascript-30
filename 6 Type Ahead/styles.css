@@ -56,6 +56,10 @@ ul li:nth-child(2n+1) {
     transform: perspective(100px) rotateX(-3deg) translateY(3px);;
     margin: -1px auto;
 }
-.population {float: right;}
+.population {
+  float: right;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+}
 
 .highlight {background-color: gold; font-weight: 500}
