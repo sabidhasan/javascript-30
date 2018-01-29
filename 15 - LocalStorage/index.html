@@ -17,11 +17,14 @@
     <h2>LOCAL TAPAS</h2>
     <p></p>
     <ul class="plates">
-      <li>Loading Tapas...</li>
+      <li>No plates yet...</li>
     </ul>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
+    </form>
+    <form class="add-items">
+      <input class="clearAll" type="button" value="Clear All">
     </form>
   </div>
 
@@ -29,10 +32,14 @@
   // DOM elements and event listeners
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
+  const clearAll = document.querySelector('.clearAll');
+
   addItems.addEventListener("submit", addItem)
+  itemsList.addEventListener("click", toggleDone)
+  clearAll.addEventListener("click", clearStorage)
 
   // Items array
-  let items = []
+  var items = localStorage.getItem('items').length !== 0 ? JSON.parse(localStorage.getItem('items')) : []
 
   //function for adding items
   function addItem(e) {
@@ -49,9 +56,9 @@
     //add new item to array
     items.push(item);
 
-    populateList(items, itemsList)
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items))
   }
-
 
   function populateList(plates = [], platesList) {
     platesList.innerHTML = plates.map((plate, i) => {
@@ -64,7 +71,34 @@
     }).join("");
 
   }
-  //LocalStorage
+
+  function toggleDone(e) {
+    //skip unless its an input
+    if (!e.target.matches("input")) return;
+
+    const el = e.target;
+    //get data ref
+    const index = el.dataset.index;
+
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items))
+    populateList(items , itemsList);
+  }
+
+  function clearStorage() {
+    //clera local items
+    items = [];
+    //reset form
+    addItems.reset();
+    //update local storage
+    localStorage.setItem('items', items);
+    //update visible list
+    populateList(items , itemsList);
+  }
+
+  //Load items from localStorage
+  populateList(items , itemsList)
+
 </script>
 
 
