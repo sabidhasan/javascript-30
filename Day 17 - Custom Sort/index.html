@@ -50,14 +50,13 @@ const sortedBands = bands.sort(alphaNoArticles)
 
 function alphaNoArticles(a, b) {
   //sort dropping The or A
-  const badWords = ["A", "The"]
-  badWords.forEach(word) {
+  const badWords = ["The ", "An ", "A "]
+  badWords.forEach((word) => {
     if (a.startsWith(word)) a = a.replace(word, "");
     if (b.startsWith(word)) b = b.replace(word, "");
-  }
-  console.log(a + '   ' + b)
+  });
+  return a > b ? 1 : -1;
 }
-
 </script>
 
 </body>
