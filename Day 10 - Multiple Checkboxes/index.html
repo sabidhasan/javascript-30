@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css?family=Roboto:100,400');
+      body, html {
+        background-color: gold;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', times;
+        font-weight: 100;
+        user-select: none;
+      }
+      .container {
+        border: 1px solid black;
+        list-style-type: none;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+        border-radius: 6px;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5)
+      }
+      input[type=checkbox] {
+        margin: 1.3rem;
+      }
+      input[type=checkbox]:checked ~ label {
+        text-decoration: line-through;
+        background-color: #eff1f4;
+        font-weight: normal;
+      }
+      label {
+        padding: 1.3rem 0 1.3rem 1rem;
+        display: inline-block;
+        height: 100%;
+        width: 74.7%;
+        border-left: 3px solid lightgray;
+        border-top-right-radius: 5px
+      }
+      li {
+        border-bottom: 1px solid #dee3ea;
+      }
+
+    </style>
+    <script type="text/javascript" src="scripts.js"></script>
+    <title>Javascript Checkboxes</title>
+  </head>
+  <body onload="config()">
+      <ul class="container">
+        <li><input type="checkbox" id="1"><label for="1">This is an input box</label></li>
+        <li><input type="checkbox" id="2"><label for="2">Check one item</label></li>
+        <li><input type="checkbox" id="3"><label for="3">Hold down shift key</label></li>
+        <li><input type="checkbox" id="4"><label for="4">Check a lower item</label></li>
+        <li><input type="checkbox" id="5"><label for="5">Everything in middle is checked</label></li>
+        <li><input type="checkbox" id="6"><label for="6">No libraries allowed</label></li>
+        <li><input type="checkbox" id="7"><label for="7">Vanilla Javascript</label></li>
+        <li><input type="checkbox" id="8"><label for="8">Here it is!</label></li>
+        <li><input type="checkbox" id="9"><label for="9">Done and done</label></li>
+      </ul>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+html, body {
+  background-color: gold;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica";
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 50%;
+}
+
+.logo {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+}
+
+input[type="text"] {
+    flex-basis: 30%;
+    padding: 0.3rem;
+    font-size: 2.2rem;
+    font-weight: 100;
+    text-align: center;
+    border: 5px solid lightgray;
+    outline: 1px solid darkgray;
+    transition: all 1s;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+ul {
+  list-style-type: none;
+  text-align: center;
+  flex-basis: 80%;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  background: linear-gradient(to bottom, #ffffff 50%,#e5e5e5 100%) white;
+  width: 75%;
+  padding: 1rem 0.7rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+  border: 2px solid silver;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 100;
+  text-transform: capitalize;
+}
+ul li:nth-child(2n) {
+    transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+    margin: -2px auto;
+}
+ul li:nth-child(2n+1) {
+    transform: perspective(100px) rotateX(-3deg) translateY(3px);;
+    margin: -1px auto;
+}
+.population {
+  float: right;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+}
+
+.highlight {background-color: gold; font-weight: 500}
