@@ -185,8 +185,16 @@
 
   const timeNodes = document.querySelectorAll('[data-time]');
 
-  const seconds = Array.from(timeNodes).map(list => list.dataset.time)
-  
+  const seconds = Array.from(timeNodes)
+       .map(list => list.dataset.time)
+       .map(times => times.split(":"))//.map(parseInt))
+       .reduce((acc, val) => acc + (parseInt(val[0]) * 60) + parseInt(val[1]), 0)
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const finalSeconds = seconds - (hours * 3600) - (minutes * 60);
+
+  document.write(`<h1>Total Time for playlist is: ${hours}:${minutes}:${finalSeconds}</h1>`)
 </script>
 </body>
 </html>
