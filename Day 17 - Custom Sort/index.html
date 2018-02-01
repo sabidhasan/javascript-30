@@ -61,6 +61,11 @@ function alphaNoArticles(a, b) {
   });
   return a > b ? 1 : -1;
 }
+
+document.querySelector("#bands").innerHTML = sortedBands
+  .map(band => `<li>${band}</li>`)
+  .join("");
+  
 </script>
 
 </body>
