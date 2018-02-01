@@ -46,6 +46,17 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+const sortedBands = bands.sort(alphaNoArticles)
+
+function alphaNoArticles(a, b) {
+  //sort dropping The or A
+  const badWords = ["A", "The"]
+  badWords.forEach(word) {
+    if (a.startsWith(word)) a = a.replace(word, "");
+    if (b.startsWith(word)) b = b.replace(word, "");
+  }
+  console.log(a + '   ' + b)
+}
 
 </script>
 
