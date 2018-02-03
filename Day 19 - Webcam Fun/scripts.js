@@ -40,7 +40,7 @@ function paintToCanvas() {
     // for effects, we get image, then modify it and repaint it onto canvas
     let pixels = ctx.getImageData(0, 0, width, height);
     //apply effect
-    pixels = redEffect(pixels);
+    pixels = greenScreen(pixels);
     //draw
     ctx.putImageData(pixels, 0 , 0)
   }, 32);
@@ -49,15 +49,50 @@ function paintToCanvas() {
 function redEffect(pixels) {
   //filter for red effect
   for (let i = 0; i < pixels.data.length; i += 4) {
-    //red channel
+    //red, gren, blue channel
     pixels.data[i] += 0;
-    //green channel
     pixels.data[i + 1] = 0;
-    // //blue channel
     pixels.data[i + 2] = 0;
   }
   return pixels;
 }
+
+function greenScreen(pixels) {
+  //take out pixels (transparency) if they fit in range
+  const levels = {};
+
+  //populate user supplied levels
+  document.querySelectorAll('.rgb input').forEach(val => levels[val.name] = val.value);
+
+  //loop over pixels array
+  for (let i = 0; i < pixels.data.length; i++) {
+    //get current r, g, b values
+    red = pixels.data[i];
+    green = pixels.data[i + 1];
+    blue = pixels.data[i + 2];
+    alpha = pixels.data[i + 3];
+
+    //if the current pixel is within user specified range, remove it
+    if (red >= levels.rmin && green >= levels.gmin && blue >= levels.bmin
+      && red <= levels.rmax && green <= levels.gmax && blue <= levels.bmax) {
+        //set alpha to 0
+        pixels.data[i + 3] = 0;
+    }
+  }
+  return pixels;
+}
+
+function rgbSplit(pixels) {
+  //filter for red effect
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    //red, gren, blue channel
+    pixels.data[i - 150] = pixels.data[i]
+    pixels.data[i + 100] = pixels.data[i + 1]
+    pixels.data[i - 150] = pixels.data[i + 2]
+  }
+  return pixels;
+}
+
 function takePhoto() {
   //play the audio
   snap.currentTime = 0;
