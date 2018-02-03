@@ -36,9 +36,28 @@ function paintToCanvas() {
   //update canvas every 32 ms
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
+
+    // for effects, we get image, then modify it and repaint it onto canvas
+    let pixels = ctx.getImageData(0, 0, width, height);
+    //apply effect
+    pixels = redEffect(pixels);
+    //draw
+    ctx.putImageData(pixels, 0 , 0)
   }, 32);
 }
 
+function redEffect(pixels) {
+  //filter for red effect
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    //red channel
+    pixels.data[i] += 0;
+    //green channel
+    pixels.data[i + 1] = 0;
+    // //blue channel
+    pixels.data[i + 2] = 0;
+  }
+  return pixels;
+}
 function takePhoto() {
   //play the audio
   snap.currentTime = 0;
