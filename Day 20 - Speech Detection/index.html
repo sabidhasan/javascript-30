@@ -7,6 +7,8 @@
 <body>
 
   <div class="words" contenteditable>
+    <h5>Start dictating, and words will appear below!</h5>
+    <h6>Say 'delete' to remove the previous sentence</h6>
   </div>
 
 <script>
@@ -16,14 +18,34 @@
   const recognition = new SpeechRecognition();
   recognition.interimResults = true;
 
-  console.log(recognition)
   //create paragraph
   let p = document.createElement('p');
   const words = document.querySelector('.words');
   words.appendChild(p);
 
-  recognition.addEventListener('results', (e) => console.log(e))
+  recognition.addEventListener('result', (e) => {
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join("")
 
+      p.textContent = transcript;
+      if (e.results[0].isFinal) {
+         if (transcript == "delete" && document.querySelectorAll('.words p').length) {
+           //delete last 2 paragraphs
+           const toDelete = document
+              .querySelectorAll(".words p:nth-last-of-type(-n+2)")
+              .forEach(child => words.removeChild(child))
+
+         } else {
+           p = document.createElement('p');
+           words.appendChild(p)
+         }
+       }
+  });
+
+  recognition.addEventListener('end', recognition.start)
+  recognition.start()
 </script>
 
 
