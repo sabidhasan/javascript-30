@@ -94,3 +94,8 @@ nav a {
   /* Use max width for transition purposes (to animate it) */
   max-width: 500px;
 }
+
+.fixed-nav .site-wrap {
+  /* Pops the content slightly bigger when nav bar gets fixed (98% to 100%) */
+  transform: scale(1)
+}
