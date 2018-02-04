@@ -26,8 +26,36 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const trigger = document.querySelectorAll("a");
+
+    //create highlight
+    const hl = document.createElement("span");
+    hl.classList.add("highlight");
+    document.body.append(hl);
+
+    //Add event listener for highlight mouse over
+    trigger.forEach(link => {
+      link.addEventListener("mouseenter", highlight);
+      link.addEventListener("mouseout", hideHighlight);
+    });
+
+    function hideHighlight() {
+      hl.style.display = "none";
+    }
+
+    function highlight(link) {
+      //Show highlight
+      hl.style.display = "block";
+
+      //Find where the element is
+      const linkCoords = this.getBoundingClientRect();
+
+      //Set highlights props
+      hl.style.width = `${linkCoords.width}px`
+      hl.style.height = `${linkCoords.height}px`
+      hl.style.top = `${window.scrollY + linkCoords.top}px`;
+      hl.style.left = `${window.scrollX + linkCoords.left}px`;
+    }
   </script>
 </body>
 </html>
-
