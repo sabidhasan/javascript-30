@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Sticky Nav</title>
-  <link rel="stylesheet" href="style-START.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -54,6 +54,23 @@
   </div>
 
 <script>
+  const nav = document.querySelector("#main");
+  const topOfNav = nav.offsetTop;
+
+  function fixNav() {
+      //if scroll too much, then fix the nav bar
+      if (window.scrollY >= topOfNav) {
+        //add padding to compensate for nav bar being fixed (so taken out of doc flow)
+        document.body.style.paddingTop = `${nav.offsetHeight}px`;
+        document.body.classList.add('fixed-nav');
+      } else {
+        document.body.style.paddingTop = "0px";
+        document.body.classList.remove('fixed-nav');
+      }
+  }
+
+  //add event listeners
+  window.addEventListener("scroll", fixNav);
 
 </script>
 
