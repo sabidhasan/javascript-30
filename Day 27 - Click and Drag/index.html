@@ -35,6 +35,48 @@
   </div>
 
 <script>
+  //Select item
+  const slider = document.querySelector(".items")
+
+  //flag variables
+  let isDown = false;
+  let startX;
+  let currentScroll;
+
+  //event listeners
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    //set StartX - to know where initial click was, on the page
+    startX = e.pageX - slider.offsetLeft;
+    //stores current scroll is within the div
+    currentScroll = slider.scrollLeft
+    //add active class
+    slider.classList.add('active')
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+    slider.classList.remove('active')
+  });
+
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.classList.remove('active')
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    //if mouse isnt clicked
+    if (!isDown) return;
+    //prevent text selection
+    e.preventDefault();
+    //determine new position on page (relative to slider positon)
+    const x = e.pageX - slider.offsetLeft;
+    //determine new position difference
+    const walk = x - startX;
+    slider.scrollLeft = currentScroll - (walk * 2);
+  });
+
+
 </script>
 
   </body>
