@@ -5,7 +5,6 @@
   <title>Follow Along Nav</title>
 </head>
 <body>
-  <h2>Cool</h2>
   <nav class="top">
     <div class="dropdownBackground">
       <span class="arrow"></span>
@@ -130,6 +129,12 @@
     transform: translateY(100px);
     will-change: opacity;
     display: none;
+
+  }
+
+  .dropdown * {
+    transform: scale(1, 0.3);
+    transition: all 0.2s;
   }
 
   .trigger-enter .dropdown {
@@ -138,8 +143,11 @@
 
   .trigger-enter-active .dropdown {
     opacity: 1;
+    /* transform: scale(0.9); */
   }
-
+.trigger-enter-active .dropdown * {
+  transform: scale(1, 1);
+}
 
 
   .dropdownBackground {
@@ -222,15 +230,33 @@
   const bg = document.querySelector(".dropdownBackground");
   const nav = document.querySelector(".top");
 
+  //Time hold the timeout for trigger enter (it needs to be cleared upon:
+  //1. hovering over a new trigger        2. Hoverig off a trigger
+  let timer;
+
   function handleEnter() {
     //show the proper list
     this.classList.add("trigger-enter")
-    setTimeout(() => this.classList.add("trigger-enter-active"), 150);
+
+    //clear previous timer
+    if (timer) clearTimeout(timer);
+    //set new timer for transition
+    timer = setTimeout(() => this.classList.add("trigger-enter-active"), 150);
     //get white background on page
+    bg.classList.add("open");
+
+    const dropdownCoords = this.querySelector(".dropdown").getBoundingClientRect();
+    const navCoords = nav.getBoundingClientRect();
+
+    bg.style.width = `${dropdownCoords.width}px`;
+    bg.style.height = `${dropdownCoords.height}px`;
+    bg.style.transform = `translate(${dropdownCoords.left - navCoords.left}px, ${dropdownCoords.top - navCoords.top}px)`
   }
 
   function handleLeave() {
-    this.classList.remove("trigger-enter", "trigger-enter-active")
+    clearTimeout(timer);
+    this.classList.remove("trigger-enter", "trigger-enter-active");
+    bg.classList.remove("open");
   }
 
   triggers.forEach(trigger => trigger.addEventListener("mouseenter", handleEnter));
