@@ -211,9 +211,30 @@
   .button[href*=facebook] { background: #3B5998; }
   .button[href*=courses] { background: #ffc600; }
 
+  .trigger-enter .dropdown {display: block;}
+  .trigger-enter-active .dropdown {opacity: 1;}
+
+
 </style>
 
 <script>
+  const triggers = document.querySelectorAll(".cool > li");
+  const bg = document.querySelector(".dropdownBackground");
+  const nav = document.querySelector(".top");
+
+  function handleEnter() {
+    //show the proper list
+    this.classList.add("trigger-enter")
+    setTimeout(() => this.classList.add("trigger-enter-active"), 150);
+    //get white background on page
+  }
+
+  function handleLeave() {
+    this.classList.remove("trigger-enter", "trigger-enter-active")
+  }
+
+  triggers.forEach(trigger => trigger.addEventListener("mouseenter", handleEnter));
+  triggers.forEach(trigger => trigger.addEventListener("mouseleave", handleLeave));
 </script>
 
 </body>
