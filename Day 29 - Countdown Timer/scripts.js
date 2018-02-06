@@ -5,7 +5,8 @@ const form = document.querySelector("#custom");
 form.addEventListener("submit", function(e) {
   e.preventDefault();
   this.dataset.time = parseInt(this.querySelector("input").value) * 60;
-  setNewTimer = setNewTimer.bind(this)
+  setNewTimer = setNewTimer.bind(this);
+  tis.reset();
   setNewTimer()
 })
 
@@ -15,12 +16,13 @@ buttons.forEach(but => but.addEventListener("click", setNewTimer))
 let timerInterval;
 
 function setNewTimer() {
-  const timerLength = this.dataset.time;
-  clearTimeout(timerInterval);
-  timer(timerLength)
+  timer(this.dataset.time)
 }
 
 function timer(secs = 0) {
+    //kill old timer
+    clearTimeout(timerInterval);
+
     //UNIX time for start and end
     const now = Date.now();
     const endTime = now + (1000 * secs);
