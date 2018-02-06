@@ -15,6 +15,32 @@
   </div>
 
 <script>
+  //query selectors
+  const speed = document.querySelector(".speed");
+  const bar = speed.querySelector(".speed-bar");
+  const video = document.querySelector(".flex");
+
+  speed.addEventListener("mousemove", handleMove);
+  speed.addEventListener("touchmove", handleMove);
+
+  function handleMove(e) {
+    //text selection
+    e.preventDefault()
+    //check for mouse click
+    if (e.buttons !== 1) return;
+
+    //get position of mouse
+    const percent = Math.round((e.pageY - this.offsetTop) / this.offsetHeight * 100);
+
+    //minimum and maximum speeds
+    const min = 0.4;
+    const max = 4;
+    const playbackRate = (((max - min) * percent / 100) + min);
+    //set height
+    bar.style.height = Math.max(percent, 5) + "%";
+    bar.textContent = playbackRate.toFixed(2) + "x";
+    video.playbackRate = playbackRate;
+  }
 </script>
 </body>
 </html>
