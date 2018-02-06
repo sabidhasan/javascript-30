@@ -1,11 +1,14 @@
-timer(3)
+
+const timerDisplay = document.querySelector(".display__time-left");
+timer(5)
+
 function timer(secs = 0) {
     //UNIX time for start and end
     const now = Date.now();
     const endTime = now + (1000 * secs);
 
     //run display
-    displayTimeLeft(Math.round(endTime - Date.now()));
+    displayTimeLeft(Math.round(endTime - now));
 
     //set interval for displaying time
     let timer = setInterval(() => {
@@ -22,7 +25,13 @@ function timer(secs = 0) {
 }
 
 
-function displayTimeLeft(secs) {
-  console.log(secs)
-
+function displayTimeLeft(milliseconds) {
+  //convert ms to seconds
+  const seconds = milliseconds / 1000;
+  const minutesLeft = Math.floor(seconds / 60).toString().padStart(2, "0");
+  const secondsLeft = Math.round(seconds % 60).toString().padStart(2, "0");
+  //display
+  const display = `${minutesLeft}:${secondsLeft}`;
+  document.title = display;
+  document.querySelector(".display__time-left").textContent = display
 }
