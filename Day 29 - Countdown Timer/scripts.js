@@ -1,6 +1,24 @@
 const endTime = document.querySelector(".display__end-time")
 const timerDisplay = document.querySelector(".display__time-left");
-timer(3000)
+
+const form = document.querySelector("#custom");
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  this.dataset.time = parseInt(this.querySelector("input").value) * 60;
+  setNewTimer = setNewTimer.bind(this)
+  setNewTimer()
+})
+
+const buttons = document.querySelectorAll("[data-time]")
+buttons.forEach(but => but.addEventListener("click", setNewTimer))
+
+let timerInterval;
+
+function setNewTimer() {
+  const timerLength = this.dataset.time;
+  clearTimeout(timerInterval);
+  timer(timerLength)
+}
 
 function timer(secs = 0) {
     //UNIX time for start and end
@@ -12,13 +30,13 @@ function timer(secs = 0) {
     displayEndTime(endTime);
 
     //set interval for displaying time
-    let timer = setInterval(() => {
+    timerInterval = setInterval(() => {
       //determine time left
       let timeLeft = Math.round(endTime - Date.now());
       //see if it needs to be stopped
       if (timeLeft < 0) {
         timeLeft = 0;
-        clearTimeout(timer);
+        clearTimeout(timerInterval);
       }
       //display seconds left
       displayTimeLeft(timeLeft);
